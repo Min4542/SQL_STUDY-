@@ -157,6 +157,47 @@ emp_no,emp_nm,SEX_CD,DEPT_CD
 FROM TB_EMP
 WHERE EMP_NM LIKE '이%'
                 AND sex_cd <> 1; -- <> == !=
+                
+
+
+--AND와 OR의 우선순위
+SELECT 
+    emp_no, emp_nm, addr, dept_cd
+FROM tb_emp
+WHERE
+            emp_nm LIKE '이%'
+            AND DEPT_CD IN ('100004','100006')
+            AND (ADDR LIKE '%수원%' OR ADDR LIKE '%성남%');
+            
+            
+            
+            
+SELECT 
+    emp_no, emp_nm, addr, dept_cd
+FROM tb_emp
+WHERE
+            emp_nm LIKE '이%'
+            AND DEPT_CD IN ('100004','100006')
+            AND NOT (ADDR LIKE '%수원%' OR ADDR LIKE '%성남%');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
