@@ -118,14 +118,32 @@ ON a.dept_cd(+) = b.dept_cd
 --FULL OUTER JOIN 
 
 SELECT
-    A.emp_no, A.emp_nm, B.dept_cd, B.dept_nm-- 앞에 쓴게 왼쪽 
+    A.emp_no, A.emp_nm, B.dept_cd, B.dept_nm
 FROM tb_emp A 
 FULL OUTER JOIN tb_dept B
-ON a.dept_cd(+) = b.dept_cd
+ON a.dept_cd = b.dept_cd
+;
+
+-- SELF JOIN 
+--1. 자기자신의 테이블을 조인하는 개념입니다.
+--2. 자기 테이블의 컬럼들을 매칭하여 조회하는 기법입니다.
+SELECT
+    A.emp_no, A.emp_nm, a.direct_manager_emp_no, B.emp_nm --하나는 자기자신 (A) 하나는 대상 컬럼이 있는 테이블(B)
+FROM tb_emp A LEFT JOIN tb_emp B
+ON a.direct_manager_emp_no = B.emp_no
 ;
 
 
+DELETE FROM tb_dept WHERE  dept_cd IN ('100014','100015');
+DELETE FROM tb_emp WHERE  emp_no IN ('1000000041','1000000042','1000000043','1000000044','1000000045');
 
+
+COMMIT;
+
+ALTER TABLE tb_emp
+ADD CONSTRAINT fk_tb_emp01
+FOREIGN KEY (dept_cd)
+REFERENCES tb_dept(dept_cd);
 
 
 
